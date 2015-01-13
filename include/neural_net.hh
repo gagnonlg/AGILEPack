@@ -55,7 +55,7 @@ public:
     // void to_yaml(const std::string &filename, const T &R);
 
     void train_unsupervised(const unsigned int &epochs, bool verbose = false, 
-        bool denoising = true, bool tantrum = false);
+	bool denoising = true, bool tantrum = false, double level = 0.02);
 
     void train_supervised(const unsigned int &epochs, bool verbose = false, 
         bool tantrum = false, int freq = 0, const std::string &filename = "tempnet.yaml");
@@ -81,7 +81,7 @@ public:
 
 private:
     void internal_train_unsupervised_weighted(const unsigned int &epochs, 
-        bool verbose = false, bool denoising = false, bool tantrum = false);
+        bool verbose = false, bool denoising = false, bool tantrum = false, double level = 0.02);
 
     void internal_train_supervised_weighted(const unsigned int &epochs, 
         bool verbose = false, bool tantrum = false,
@@ -90,7 +90,7 @@ private:
 
 
     void internal_train_unsupervised(const unsigned int &epochs, 
-        bool verbose = false, bool denoising = false, bool tantrum = false);
+        bool verbose = false, bool denoising = false, bool tantrum = false, double level = 0.02);
 
     void internal_train_supervised(const unsigned int &epochs, 
         bool verbose = false, bool tantrum = false, 

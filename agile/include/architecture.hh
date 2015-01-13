@@ -102,10 +102,10 @@ public:
         double weight);
 
     void encode(const agile::vector &in, const unsigned int &which, 
-        bool noisify = true);
+	bool noisify = true, double level = 0.02);
 
     void encode(const agile::vector &in, const unsigned int &which, 
-        double weight, bool noisify = true);
+	double weight, bool noisify = true, double level = 0.02);
 
     double encoding_mse(const agile::matrix &A, const unsigned int &which);
 

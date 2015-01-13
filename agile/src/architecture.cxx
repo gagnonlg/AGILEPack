@@ -179,11 +179,11 @@ void architecture::correct(const agile::vector &in,
 }
 //----------------------------------------------------------------------------
 void architecture::encode(const agile::vector &in, const unsigned int &which, 
-    bool noisify)
+    bool noisify, double level)
 {
     if (which == 0)
     {
-        stack.at(0)->encode(in, noisify);
+        stack.at(0)->encode(in, noisify, level);
         return;
     }
     stack.at(0)->charge(in);
@@ -193,15 +193,15 @@ void architecture::encode(const agile::vector &in, const unsigned int &which,
         stack.at(l)->charge(stack.at(l - 1)->fire());
     }
     agile::vector v = stack.at(which - 1)->fire();
-    stack.at(which)->encode(v, noisify);
+    stack.at(which)->encode(v, noisify, level);
 }
 //----------------------------------------------------------------------------
 void architecture::encode(const agile::vector &in, const unsigned int &which, 
-    double weight, bool noisify)
+    double weight, bool noisify, double level)
 {
     if (which == 0)
     {
-        stack.at(0)->encode(in, weight, noisify);
+        stack.at(0)->encode(in, weight, noisify, level);
         return;
     }
     stack.at(0)->charge(in);
@@ -211,7 +211,7 @@ void architecture::encode(const agile::vector &in, const unsigned int &which,
         stack.at(l)->charge(stack.at(l - 1)->fire());
     }
     agile::vector v = stack.at(which - 1)->fire();
-    stack.at(which)->encode(v, weight, noisify);
+    stack.at(which)->encode(v, weight, noisify, level);
 }
 //----------------------------------------------------------------------------
 double architecture::encoding_mse(const agile::matrix &A, const unsigned int &which)

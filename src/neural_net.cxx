@@ -285,16 +285,16 @@ void neural_net::to_yaml(const std::string &filename,
 }
 //----------------------------------------------------------------------------
 void neural_net::train_unsupervised(const unsigned int &epochs, bool verbose, 
-    bool denoising, bool tantrum)
+    bool denoising, bool tantrum, double level)
 {
     if (m_weighted)
     {
         internal_train_unsupervised_weighted(epochs, 
-            verbose, denoising, tantrum);
+            verbose, denoising, tantrum, level);
     }
     else
     {
-        internal_train_unsupervised(epochs, verbose, denoising, tantrum);
+	internal_train_unsupervised(epochs, verbose, denoising, tantrum, level);
     }
 }
 //----------------------------------------------------------------------------
@@ -314,7 +314,7 @@ void neural_net::train_supervised(const unsigned int &epochs,
 //----------------------------------------------------------------------------
 
 void neural_net::internal_train_unsupervised_weighted(
-    const unsigned int &epochs, bool verbose, bool denoising, bool tantrum)
+    const unsigned int &epochs, bool verbose, bool denoising, bool tantrum, double level)
 {
     if (!m_checked)
     {
@@ -338,7 +338,7 @@ void neural_net::internal_train_unsupervised_weighted(
                     pct = (double)ctr / (double)total;
                     agile::progress_bar(pct * 100);
                 }
-                encode(X.row(i), idx, pattern_weights(i), denoising);
+                encode(X.row(i), idx, pattern_weights(i), denoising, level);
                 ++ctr;
             }
         }
@@ -382,7 +382,7 @@ void neural_net::internal_train_supervised_weighted(
 }
 //----------------------------------------------------------------------------
 void neural_net::internal_train_unsupervised(const unsigned int &epochs, 
-    bool verbose, bool denoising, bool tantrum)
+    bool verbose, bool denoising, bool tantrum, double level)
 {
     if (!m_checked)
     {
@@ -407,7 +407,7 @@ void neural_net::internal_train_unsupervised(const unsigned int &epochs,
                     agile::progress_bar(pct * 100);
 
                 }
-                encode(X.row(i), idx, denoising);
+                encode(X.row(i), idx, denoising, level);
                 ++ctr;
             }
         }
