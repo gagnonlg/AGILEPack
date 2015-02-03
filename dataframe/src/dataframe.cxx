@@ -89,7 +89,7 @@ dataframe::~dataframe()
 //-----------------------------------------------------------------------------
 //  Loading and writing
 //-----------------------------------------------------------------------------
-void dataframe::from_csv(std::string filename, bool colnames)
+void dataframe::from_csv(std::string filename, bool colnames, bool fast)
 {
     std::ifstream input(filename);
     data.clear();
@@ -113,7 +113,12 @@ void dataframe::from_csv(std::string filename, bool colnames)
     {
         m_columns_set = false;
     }
-    input >> data;
+    if (fast)
+    {
+	get_data_fast(filename, data, colnames);
+    } else {
+    	input >> data;
+    }
     m_rows = data.size();
     m_cols = data[0].size();
     input.close();

@@ -39,7 +39,7 @@ public:
 //  Loading and writing
 //-----------------------------------------------------------------------------
 
-    void from_csv(std::string filename, bool colnames = false);
+    void from_csv(std::string filename, bool colnames = false, bool fast = false);
     void to_csv(std::string filename, bool write_colnames = true);
     friend std::ostream& operator << ( std::ostream& os, dataframe &data );
 
