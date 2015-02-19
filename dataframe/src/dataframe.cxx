@@ -128,7 +128,7 @@ void dataframe::to_csv(std::string filename, bool write_colnames, bool truncate)
 {
     std::ios_base::openmode mode = std::ofstream::out;
     if (!truncate)
-	    mode |= std::ofstream::ate;
+	    mode |= std::ofstream::app;
     std::ofstream output(filename, mode);
     if (write_colnames && m_columns_set)
     {
