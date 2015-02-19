@@ -51,4 +51,35 @@ std::string trim(const std::string& str, const std::string& whitespace)
     return str.substr(strBegin, strRange);
 }
 //----------------------------------------------------------------------------
+
+void get_data_fast(std::string& path, data_t& data, bool skipfirst)
+{
+
+	data.clear();
+
+	FILE *f = fopen(path.c_str(), "r");
+	
+	size_t size = 1024;
+	char *lineptr = (char*)std::malloc(sizeof(char) * size);
+	char *cptr;
+
+	if (skipfirst)
+		getline(&lineptr, &size, f);
+
+	while(getline(&lineptr, &size, f) > -1) {
+		record_t r;
+		cptr = lineptr;
+		do {
+			double num;
+			sscanf(++cptr, "%lf", &num);
+			r.push_back(num);
+			cptr = std::strchr(cptr, ',');
+		} while (cptr);
+
+		data.push_back(std::move(r));
+	}
+	fclose(f);
 }
+
+}
+

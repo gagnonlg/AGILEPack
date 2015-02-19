@@ -7,6 +7,9 @@
 #ifndef CSV__READER__HH
 #define CSV__READER__HH 
 
+#include <stdio.h>
+#include <cstdlib>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -54,6 +57,8 @@ inline std::string no_quotes(std::string str)
     return str;
 }
 //----------------------------------------------------------------------------
+
+void get_data_fast(std::string& path, data_t& data, bool skipfirst);
 
 }
 
