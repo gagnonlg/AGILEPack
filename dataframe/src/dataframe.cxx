@@ -119,8 +119,11 @@ void dataframe::from_csv(std::string filename, bool colnames)
     input.close();
 }
 //----------------------------------------------------------------------------
-void dataframe::to_csv(std::string filename, bool write_colnames)
+void dataframe::to_csv(std::string filename, bool write_colnames, bool truncate)
 {
+    std::ios_base::openmode mode = std::ofstream::out;
+    if (!truncate)
+	    mode |= std::ofstream::ate;
     std::ofstream output(filename);
     if (write_colnames && m_columns_set)
     {

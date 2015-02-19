@@ -40,7 +40,7 @@ public:
 //-----------------------------------------------------------------------------
 
     void from_csv(std::string filename, bool colnames = false);
-    void to_csv(std::string filename, bool write_colnames = true);
+    void to_csv(std::string filename, bool write_colnames = true, bool truncate = true);
     friend std::ostream& operator << ( std::ostream& os, dataframe &data );
 
     data_t& raw();
